@@ -36,21 +36,14 @@ const NewVisitorForm = () => {
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    addVisitor({
-      id: 1,
-      fullName: "Jakub Zientek",
-      email: "jakub.zient@gmail.com",
-      department: "IT",
-    });
+    addVisitor(data);
     addNotice("Visitor added");
-
-    console.log(data);
   };
 
   console.log(watch("fullName")); // watch input value by passing the name of it
 
   return (
-    <div className="border p-4 rounded-xl shadow-xl">
+    <div className="border p-4 rounded-xl shadow-xl ">
       <h2 className="text-xl pb-4">Add new visitor</h2>
       <p className="pb-4">Fill name, email address and the department</p>
       <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
@@ -76,6 +69,7 @@ const NewVisitorForm = () => {
             <MenuItem value={"IT"}>IT</MenuItem>
             <MenuItem value={"Sales"}>Sales</MenuItem>
             <MenuItem value={"Management"}>Management</MenuItem>
+            <MenuItem value={"Accounting"}>Management</MenuItem>
           </Select>
           <FormControlLabel
             required

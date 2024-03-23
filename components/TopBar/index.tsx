@@ -4,17 +4,18 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const TopBar = () => {
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          <FavoriteIcon className="mx-3" />
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -25,7 +26,7 @@ const TopBar = () => {
               textDecoration: "none",
             }}
           >
-            Application
+            Guestbook
           </Typography>
         </Toolbar>
       </Container>
