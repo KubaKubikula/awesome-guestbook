@@ -59,8 +59,13 @@ const VisitorList = () => {
 
   const removeVisitor = () => {
     const rows = ref.current.getSelectedRows();
-    removeVisitors(rows);
-    addNotice("Visitor removed");
+    console.log(rows);
+    if (rows.size > 0) {
+      removeVisitors(rows);
+      addNotice("Visitor removed");
+    } else {
+      addNotice("No visitor is selected");
+    }
   };
 
   return (
