@@ -16,6 +16,7 @@ import Stack from "@mui/material/Stack";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useStore } from "@/store/visitors";
+import { useNoticeStore } from "@/store/notice";
 
 type Inputs = {
   fullName: string;
@@ -23,9 +24,10 @@ type Inputs = {
   department: string;
 };
 
-const NewVisitorForm = ({ setVisitors }: any) => {
+const NewVisitorForm = () => {
   const [department, setDepartment] = useState("");
   const addVisitor = useStore((state: any) => state.addVisitor);
+  const addNotice = useNoticeStore((state: any) => state.addNotice);
 
   const {
     register,
@@ -40,13 +42,15 @@ const NewVisitorForm = ({ setVisitors }: any) => {
       email: "jakub.zient@gmail.com",
       department: "IT",
     });
+    addNotice("Visitor added");
+
     console.log(data);
   };
 
   console.log(watch("fullName")); // watch input value by passing the name of it
 
   return (
-    <div className="border p-4 rounded-xl">
+    <div className="border p-4 rounded-xl shadow-xl">
       <h2 className="text-xl pb-4">Add new visitor</h2>
       <p className="pb-4">Fill name, email address and the department</p>
       <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
