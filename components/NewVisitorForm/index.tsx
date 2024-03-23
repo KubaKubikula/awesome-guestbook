@@ -15,43 +15,34 @@ import Stack from "@mui/material/Stack";
 import PersonIcon from "@mui/icons-material/Person";
 import Alert from "@mui/material/Alert";
 import Typography from "@mui/material/Typography";
-
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useStore } from "@/store/visitors";
-import { useNoticeStore } from "@/store/notice";
-
-type Inputs = {
-  fullName: string;
-  email: string;
-  department: string;
-  agree: boolean;
-};
+import { useStore, IVisitor, VisitorStateType } from "@/store/visitors";
+import { useNoticeStore, NoticeStateType } from "@/store/notice";
+import { InputsType } from "./types";
 
 const NewVisitorForm = () => {
-  const [department, setDepartment] = useState("Marketing");
+  const [department, setDepartment] = useState<string>("Marketing");
   const [agree, setAgree] = useState<boolean>(false);
-  const [emailExists, setEmailExists] = useState(false);
-  const addVisitor = useStore((state: any) => state.addVisitor);
-  const visitors = useStore((state: any) => state.visitors);
-  const addNotice = useNoticeStore((state: any) => state.addNotice);
+  const [emailExists, setEmailExists] = useState<boolean>(false);
+  const addVisitor = useStore((state: VisitorStateType) => state.addVisitor);
+  const visitors = useStore((state: VisitorStateType) => state.visitors);
+  const addNotice = useNoticeStore((state: NoticeStateType) => state.addNotice);
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  } = useForm<InputsType>();
+  const onSubmit: SubmitHandler<InputsType> = (data) => {
     setEmailExists(false);
     const visitorsWithSameEmail = visitors.filter(
-      (visitor) => visitor.email === data.email
+      (visitor: IVisitor) => visitor.email === data.email
     );
-
     if (visitorsWithSameEmail.length > 0) {
       setEmailExists(true);
       return false;
     }
-
     addVisitor(data);
     addNotice("Visitor added");
   };

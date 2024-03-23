@@ -3,15 +3,17 @@
 import React from "react";
 import { DataGrid, GridColDef, useGridApiRef } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
-import { useStore } from "@/store/visitors";
-import { useNoticeStore } from "@/store/notice";
+import { useStore, VisitorStateType } from "@/store/visitors";
+import { useNoticeStore, NoticeStateType } from "@/store/notice";
 import Typography from "@mui/material/Typography";
 import clsx from "clsx";
 
 const VisitorList = () => {
-  const visitors = useStore((state: any) => state.visitors);
-  const removeVisitors = useStore((state: any) => state.removeVisitors);
-  const addNotice = useNoticeStore((state: any) => state.addNotice);
+  const visitors = useStore((state: VisitorStateType) => state.visitors);
+  const removeVisitors = useStore(
+    (state: VisitorStateType) => state.removeVisitors
+  );
+  const addNotice = useNoticeStore((state: NoticeStateType) => state.addNotice);
   const ref = useGridApiRef();
 
   const columns: GridColDef[] = [

@@ -2,12 +2,12 @@
 
 import React from "react";
 import Snackbar from "@mui/material/Snackbar";
-import { useNoticeStore } from "../../store/notice";
+import { useNoticeStore, NoticeStateType } from "@/store/notice";
 import Alert from "@mui/material/Alert";
 
 const NoticeBar = () => {
-  const notice = useNoticeStore((state: any) => state.notice);
-  const addNotice = useNoticeStore((state: any) => state.addNotice);
+  const notice = useNoticeStore((state: NoticeStateType) => state.notice);
+  const addNotice = useNoticeStore((state: NoticeStateType) => state.addNotice);
 
   return (
     <Snackbar

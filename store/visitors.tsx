@@ -1,53 +1,44 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { visitorsMock } from "@/mock";
 
-export const useStore = create(
+export type IVisitor = {
+  id: number;
+  fullName: string;
+  email: string;
+  department: string;
+};
+
+export type VisitorStateType =
+  | {
+      visitors: IVisitor | null;
+      addVisitor: (visitor: Omit<IVisitor, "id">) => void;
+      removeVisitors: (visitors: IVisitor[]) => void;
+    }
+  | any;
+
+export const useStore = create<VisitorStateType>(
   persist(
-    (set, get: any) => ({
-      visitors: [
-        {
-          id: 0,
-          fullName: "John Doe",
-          email: "john.doe@gmail.com",
-          department: "IT",
-        },
-        {
-          id: 1,
-          fullName: "Test name",
-          email: "john.doe@gmail.com",
-          department: "Marketing",
-        },
-        {
-          id: 2,
-          fullName: "John Doe 34",
-          email: "john.doe@gmail.com",
-          department: "Sales",
-        },
-        {
-          id: 3,
-          fullName: "John Doe 23",
-          email: "john.doe@gmail.com",
-          department: "Management",
-        },
-        {
-          id: 4,
-          fullName: "John Doe 45",
-          email: "john.doe@gmail.com",
-          department: "Accounting",
-        },
-      ],
-      addVisitor: (visitor: any) => {
+    (set, get) => ({
+      visitors: visitorsMock,
+      addVisitor: (visitor: Omit<IVisitor, "id"> | unknown) => {
         const vis = get().visitors;
+
+        if (!visitor) {
+          return vis;
+        }
+
         const max =
           vis.length > 0
-            ? vis.reduce((prev, current) =>
+            ? vis.reduce((prev: IVisitor, current: IVisitor) =>
                 prev && prev.id > current.id ? prev : current
               )
             : { id: 0 };
         return set({ visitors: [...vis, { ...visitor, id: max.id++ }] });
       },
-      removeVisitors: (visitors: any) => {
-        const visitorResult = get().visitors.filter((visitor: any) => {
+      removeVisitors: (visitors: IVisitor[]) => {
+        const visitorResult = get().visitors.filter((visitor: IVisitor) => {
+          // @ts-ignore
           return !visitors.has(visitor.id);
         });
 
