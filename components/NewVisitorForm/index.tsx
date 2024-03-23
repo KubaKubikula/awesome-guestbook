@@ -28,7 +28,9 @@ type Inputs = {
 
 const NewVisitorForm = () => {
   const [department, setDepartment] = useState("Marketing");
+  const [emailExists, setEmailExists] = useState(false);
   const addVisitor = useStore((state: any) => state.addVisitor);
+  const visitors = useStore((state: any) => state.visitors);
   const addNotice = useNoticeStore((state: any) => state.addNotice);
 
   const {
@@ -38,6 +40,16 @@ const NewVisitorForm = () => {
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
+    setEmailExists(false);
+    const visitorsWithSameEmail = visitors.filter(
+      (visitor) => visitor.email === data.email
+    );
+
+    if (visitorsWithSameEmail.length > 0) {
+      setEmailExists(true);
+      return false;
+    }
+
     addVisitor(data);
     addNotice("Visitor added");
   };
@@ -60,6 +72,9 @@ const NewVisitorForm = () => {
           variant="outlined"
         />
         {errors.email && <Alert severity="error">{errors.email.message}</Alert>}
+        {emailExists && (
+          <Alert severity="error">User with this email already exists</Alert>
+        )}
         <TextField
           {...register("email", {
             required: "Email is required",
