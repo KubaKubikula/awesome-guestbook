@@ -45,6 +45,7 @@ const NewVisitorForm = () => {
     }
     addVisitor(data);
     addNotice("Visitor added");
+    reset();
   };
 
   return (
