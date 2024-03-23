@@ -22,6 +22,15 @@ const theme = createTheme({
       main: pink[500],
     },
   },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 28,
+        },
+      },
+    },
+  },
 });
 
 export default theme;

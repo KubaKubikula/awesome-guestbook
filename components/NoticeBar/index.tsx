@@ -1,22 +1,30 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Snackbar from "@mui/material/Snackbar";
 import { useNoticeStore } from "../../store/notice";
+import Alert from "@mui/material/Alert";
 
-const NoticeBar = ({ message }: { message: string }) => {
+const NoticeBar = () => {
   const notice = useNoticeStore((state: any) => state.notice);
   const addNotice = useNoticeStore((state: any) => state.addNotice);
-  const [open, setOpen] = useState(true);
 
   return (
     <Snackbar
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
       open={notice ? true : false}
       autoHideDuration={5000}
-      message={notice}
       onClose={() => addNotice("")}
-    />
+    >
+      <Alert
+        onClose={() => addNotice("")}
+        severity="success"
+        variant="filled"
+        sx={{ width: "100%" }}
+      >
+        {notice}
+      </Alert>
+    </Snackbar>
   );
 };
 

@@ -10,7 +10,7 @@ export default function Home() {
     <div>
       <NoticeBar />
       <TopBar />
-      <main className="flex flex-row p-6 gap-6 justify-center items-stretch flex-wrap">
+      <main className="flex flex-col lg:flex-row p-6 gap-6 justify-center">
         <NewVisitorForm />
         <VisitorList />
       </main>

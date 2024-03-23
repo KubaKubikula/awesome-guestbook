@@ -61,13 +61,13 @@ const VisitorList = () => {
   };
 
   return (
-    <div className="border rounded-xl shadow-xl w-2/3">
+    <div className="border rounded-xl shadow-xl w-full lg:w-1/2 xl:w-2/3">
       <h1 className="text-xl p-4">Visitor list</h1>
       {visitors.length > 0 ? (
         <>
           <div className="p-4">
             <Button
-              variant="outlined"
+              variant="contained"
               size="small"
               onClick={() => removeVisitor()}
             >
