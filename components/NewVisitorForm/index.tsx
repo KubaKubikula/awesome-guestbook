@@ -14,6 +14,7 @@ import RestoreIcon from "@mui/icons-material/Restore";
 import Stack from "@mui/material/Stack";
 import PersonIcon from "@mui/icons-material/Person";
 import Alert from "@mui/material/Alert";
+import Typography from "@mui/material/Typography";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useStore } from "@/store/visitors";
@@ -42,9 +43,13 @@ const NewVisitorForm = () => {
   };
 
   return (
-    <div className="border p-4 rounded-xl shadow-xl flex flex-col h-min w-full lg:w-1/2 xl:w-1/3">
-      <h2 className="text-xl pb-4">Add new visitor</h2>
-      <p className="pb-4">Fill name, email address and the department</p>
+    <div className="border p-4 rounded-xl shadow-xl flex flex-col h-min w-full xl:w-1/3">
+      <Typography variant="h6" sx={{ paddingBottom: 0.25 }}>
+        Add new visitor
+      </Typography>
+      <Typography variant="subtitle1" sx={{ paddingBottom: 2 }}>
+        Fill name, email address and the department
+      </Typography>
       <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
         {errors.fullName && (
           <Alert severity="error">{errors.fullName.message}</Alert>

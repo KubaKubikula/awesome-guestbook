@@ -2,7 +2,7 @@
 
 import { Roboto } from "next/font/google";
 import { createTheme } from "@mui/material/styles";
-import { red, pink } from "@mui/material/colors";
+import { pink } from "@mui/material/colors";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -16,7 +16,7 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      main: red[500],
+      main: "#EF5742",
     },
     secondary: {
       main: pink[500],

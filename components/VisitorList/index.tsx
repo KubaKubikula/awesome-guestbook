@@ -5,6 +5,7 @@ import { DataGrid, GridColDef, useGridApiRef } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
 import { useStore } from "@/store/visitors";
 import { useNoticeStore } from "@/store/notice";
+import Typography from "@mui/material/Typography";
 import clsx from "clsx";
 
 const VisitorList = () => {
@@ -38,7 +39,7 @@ const VisitorList = () => {
       renderCell: ({ value }) => (
         <span
           className={clsx(
-            "p-4 rounded-full border text-white",
+            "p-2 rounded-full border text-white text-sm",
             value === "Marketing" && "bg-[#2196F3]",
             value === "Sales" && "bg-[#0288D1]",
             value === "IT" && "bg-[#9C27B0]",
@@ -61,11 +62,13 @@ const VisitorList = () => {
   };
 
   return (
-    <div className="border rounded-xl shadow-xl w-full lg:w-1/2 xl:w-2/3">
-      <h1 className="text-xl p-4">Visitor list</h1>
+    <div className="border rounded-xl shadow-xl w-full xl:w-2/3">
+      <Typography variant="h4" sx={{ padding: 2 }}>
+        Visitor management
+      </Typography>
       {visitors.length > 0 ? (
         <>
-          <div className="p-4">
+          <div className="p-3">
             <Button
               variant="contained"
               size="small"
