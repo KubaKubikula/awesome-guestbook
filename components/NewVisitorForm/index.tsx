@@ -24,10 +24,12 @@ type Inputs = {
   fullName: string;
   email: string;
   department: string;
+  agree: boolean;
 };
 
 const NewVisitorForm = () => {
   const [department, setDepartment] = useState("Marketing");
+  const [agree, setAgree] = useState<boolean>(false);
   const [emailExists, setEmailExists] = useState(false);
   const addVisitor = useStore((state: any) => state.addVisitor);
   const visitors = useStore((state: any) => state.visitors);
@@ -104,12 +106,17 @@ const NewVisitorForm = () => {
         </FormControl>
         <FormControlLabel
           required
-          control={<Checkbox />}
+          control={
+            <Checkbox checked={agree} onChange={() => setAgree(!agree)} />
+          }
           label="I agree to be added to the table"
         />
         <Stack direction="row" spacing={2}>
           <Button
-            onClick={() => reset()}
+            onClick={() => {
+              reset();
+              setAgree(false);
+            }}
             variant="outlined"
             startIcon={<RestoreIcon />}
             size="large"
